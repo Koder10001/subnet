@@ -1,7 +1,7 @@
 abortSignal = false;
 workingOnJob = false;
 
-function update(){
+function update(ip = undefined, subnet = undefined, networkID = undefined, broadcast = undefined){
 
     let ipDOM = document.querySelectorAll("#ip > input");
     let ipBinary = document.querySelectorAll("#ipBinary > input");
@@ -33,9 +33,59 @@ function update(){
         ipBinary[i].value = toBinary(parseInt(ipDOM[i].value));
     }
 
-    
     updateSubnetMask(classBit, true)
 
+    updateNetworkID(networkID);
+
+    updateBroadcastIP(broadcast);
+
+}
+
+async function updateSubnetMask(bit, isDisable = false){
+
+    if(workingOnJob){
+        abortSignal = true;
+        await sleep(200);
+        updateSubnetMask(bit, isDisable);
+        return;
+    }
+    
+    let subnetMask = document.querySelectorAll("#subnetMask > select");
+    let subnetMaskBinary = document.querySelectorAll("#subnetMaskBinary > input");
+
+    let i;
+    for(i = 0; i < 4; i++){
+        console.log(bit);
+        if(bit >= 0){
+            if(bit >= 8){
+                subnetMask[i].selectedIndex = 8;
+                if(isDisable){
+                    subnetMask[i].disabled = true;
+                }
+            }
+            else{
+                subnetMask[i].selectedIndex = bit;
+                subnetMask[i].disabled = false;
+            }
+        }
+        else {
+            subnetMask[i].selectedIndex = 0;
+            subnetMask[i].disabled = false;
+        }
+        subnetMaskBinary[i].value = toBinary(subnetMask[i].value);
+        bit -= 8;
+    }
+
+    clearTable();
+    listSubnets();
+
+}
+
+function updateNetworkID(networkID){
+
+}
+
+function updateBroadcastIP(broadcastIP){
 
 }
 
@@ -150,46 +200,6 @@ function getSubnetBits(){
 
 }
 
-async function updateSubnetMask(bit, isDisable = false){
-
-    if(workingOnJob){
-        abortSignal = true;
-        await sleep(200);
-        updateSubnetMask(bit, isDisable);
-        return;
-    }
-    
-    let subnetMask = document.querySelectorAll("#subnetMask > select");
-    let subnetMaskBinary = document.querySelectorAll("#subnetMaskBinary > input");
-
-    let i;
-    for(i = 0; i < 4; i++){
-        console.log(bit);
-        if(bit >= 0){
-            if(bit >= 8){
-                subnetMask[i].selectedIndex = 8;
-                if(isDisable){
-                    subnetMask[i].disabled = true;
-                }
-            }
-            else{
-                subnetMask[i].selectedIndex = bit;
-                subnetMask[i].disabled = false;
-            }
-        }
-        else {
-            subnetMask[i].selectedIndex = 0;
-            subnetMask[i].disabled = false;
-        }
-        subnetMaskBinary[i].value = toBinary(subnetMask[i].value);
-        bit -= 8;
-    }
-
-    clearTable();
-    listSubnets();
-
-}
-
 function toBinary(num, len = 8){
     let bin = "";
     // let flag = [128,64,32,16,8,4,2,1];
@@ -245,7 +255,7 @@ function clearTable(){
     let table = document.querySelector("#IPTable > tbody");
 
     table.innerHTML = `
-    <tr>
+    <tr onclick="">
         <th>Network ID</th>
         <th>Broadcast IP</th>
         <th>Range</th>

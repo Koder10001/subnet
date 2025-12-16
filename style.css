@@ -93,8 +93,8 @@ input {
 }
 
 input:disabled {
-  background-color: var(--disabled-bg-color);
-  color: var(--secondary-text-color);
+  background-color: transparent;
+  color: var(--primary-text-color);
 }
 
 input:focus,
@@ -124,6 +124,7 @@ input[type="number"] {
 select {
   max-width: 120px;
   width: 100%;
+  border-radius: 0px;
   text-align: center;
   padding: 5px;
   height: 40px;
@@ -180,7 +181,7 @@ select:disabled {
   display: inline-block;
   width: 50%;
   position: fixed;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
 }
 
 #group2 {
