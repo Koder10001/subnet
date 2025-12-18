@@ -182,6 +182,7 @@ select:disabled {
   width: 50%;
   position: fixed;
   /* overflow-y: scroll; */
+  /* scrollbar-width: thin; */
 }
 
 #group2 {

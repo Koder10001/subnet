@@ -300,12 +300,30 @@ function bitsToIP(bits){
 function appendTable(network, broadcast, min, max){
     let table = document.querySelector("#IPTable > tbody");
 
-    table.innerHTML += 
-    `<tr onclick="update('${bitsToIP(network)}')">
-        <td>${bitsToIP(network)}</td>
-        <td>${bitsToIP(broadcast)}</td>
-        <td>${bitsToIP(min)} - ${bitsToIP(max)}</td>
-    </tr>`
+    let tr = document.createElement("tr");
+    tr.onclick = ()=>{
+        update(bitsToIP(min));
+    }
+    let net = document.createElement("td");
+    net.innerText = bitsToIP(network);
+    let broad = document.createElement("td");
+    broad.innerText = bitsToIP(broadcast);
+    let range = document.createElement("td");
+    range.innerHTML = bitsToIP(min) + " - " + bitsToIP(max);
+
+    tr.appendChild(net);
+    tr.appendChild(broad);
+    tr.appendChild(range);
+
+    table.appendChild(tr);
+
+
+    // table.innerHTML += 
+    // `<tr onclick="setTimeout(update,50,'${bitsToIP(network)}')">
+    //     <td>${bitsToIP(network)}</td>
+    //     <td>${bitsToIP(broadcast)}</td>
+    //     <td>${bitsToIP(min)} - ${bitsToIP(max)}</td>
+    // </tr>`
 }
 
 function clearTable(){
