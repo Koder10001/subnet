@@ -344,6 +344,37 @@ function sleep(ms){
     });
 }
 
+function copyField(DOM){
+    let fields = DOM.parentNode.nextElementSibling.querySelectorAll("input")
+    if(fields.length == 0){
+        fields = DOM.parentNode.nextElementSibling.querySelectorAll("select")
+    }
+    console.log(fields);
+    let str = "";
+    
+    for(let i = 0; i < 4; i++ ){
+
+        str += fields[i].value;
+        if(i != 3){
+            str += ".";
+        }
+    }
+
+    navigator.clipboard.writeText(str);
+
+    showPopup();
+
+}
+
+function showPopup(){
+
+    let popup = document.querySelector("#copied");
+    popup.classList.remove("show");
+    popup.offsetHeight;
+    popup.classList.add("show");
+
+}
+
 window.onload = ()=>{
     update();
 }
