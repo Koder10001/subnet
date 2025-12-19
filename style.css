@@ -74,6 +74,7 @@ div {
   border-radius: 200px;
   border: none;
   cursor: pointer;
+  user-select: none;
 }
 
 .copybutton:active {
