@@ -25,6 +25,7 @@ body {
   background-color: var(--primary-bg-color);
   color: var(--primary-text-color);
   font-family: "JetBrains";
+  margin-top: 60px;
 }
 
 * {
@@ -37,10 +38,16 @@ body {
 .container {
   max-width: 100vw;
   display: flex;
-  justify-content: center;
-  flex-flow: column wrap;
+  flex-flow: column;
   align-content: center;
-  height: 100vh;
+  height: calc(100vh - 60px);
+  overflow-y: scroll;
+  scrollbar-width: none;
+}
+
+.container::-webkit-scrollbar {
+    width: 0;
+    height: 0;
 }
 
 /*.container > div {
@@ -124,7 +131,8 @@ input[type="number"] {
 }
 
 select {
-  max-width: 120px;
+  /*max-width: 120px;*/
+  max-width: 110px;
   width: 100%;
   border-radius: 0px;
   text-align: center;
@@ -146,7 +154,8 @@ td {
 th {
   position: sticky;
   background-color: var(--primary-bg-color);
-  top: 0px;
+  top: 10px;
+  z-index: 11;
   /*border-bottom: 1px solid rgba(0, 0, 0, 0.25);*/
 }
 
@@ -180,11 +189,9 @@ select:disabled {
 }
 
 #group1 {
-  display: inline-block;
   width: 50%;
   position: fixed;
-  /* overflow-y: scroll; */
-  /* scrollbar-width: thin; */
+  justify-content: center;
 }
 
 #group2 {
@@ -194,7 +201,12 @@ select:disabled {
 }
 
 @media screen and (max-width: 1000px) {
-  #group1,
+  #group1 {
+    display: flex;
+    width: 100%;
+    position: unset; 
+  }
+
   #group2 {
     display: contents;
   }
@@ -202,6 +214,7 @@ select:disabled {
   .container {
     height: unset;
     margin: 20px;
+    width: fit-content;
   }
 }
 
@@ -243,3 +256,19 @@ select:disabled {
   opacity: 0;
 }
 
+#groupthing {
+  display: inline-block;
+  color: var(--secondary-text-color);
+  font-weight: normal;
+  margin-top: 10px;
+}
+
+#header {
+  background-color: var(--primary-bg-color);
+  border-bottom: 2px solid var(--secondary-bg-color);
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  padding: 10px 10px 10px 20px;
+  z-index: 10;
+}
