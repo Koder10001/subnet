@@ -146,6 +146,7 @@ function updateBroadcastIP(){
 
 }
 
+
 async function listSubnets(){
 
     let ipBinaryDOM = document.querySelectorAll("#ipBinary > input");
@@ -153,6 +154,11 @@ async function listSubnets(){
 
     let numOfClassBits = getClassBit()
     let numOfSubnetBits = getNetworkBits() - numOfClassBits;
+
+    console.log(numOfClassBits);
+
+    document.querySelector("#numOfSubnet").innerText = Math.pow(2, numOfSubnetBits);
+    document.querySelector("#numOfHostPerSubnet").innerText = Math.pow(2, 32 - (numOfClassBits + numOfSubnetBits)) - 2;
 
     let ipBinary = "";
     let subnetMaskBinary = "";
