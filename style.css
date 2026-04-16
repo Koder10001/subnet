@@ -157,6 +157,7 @@ th {
   top: 10px;
   z-index: 11;
   /*border-bottom: 1px solid rgba(0, 0, 0, 0.25);*/
+  cursor: initial !important;
 }
 
 tr:nth-of-type(odd) {

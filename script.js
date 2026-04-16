@@ -63,22 +63,37 @@ async function updateSubnetMask(bit, isDisable = false){
 
     let i;
     for(i = 0; i < 4; i++){
-        console.log(bit);
         if(bit >= 0){
             if(bit >= 8){
                 subnetMask[i].selectedIndex = 8;
                 if(isDisable){
-                    subnetMask[i].disabled = true;
+                    for(let j = 0; j < subnetMask[i].options.length ; j++){
+                        subnetMask[i].options[j].disabled = true;
+                    }
                 }
             }
             else{
+                if(isDisable){
+                    for(let j = 0; j < subnetMask[i].options.length; j++){
+                        if(j < bit){
+                            subnetMask[i].options[j].disabled = true;
+                        }
+                        else {
+                            subnetMask[i].options[j].disabled = false;
+                        }
+                        
+
+                    }
+                }
                 subnetMask[i].selectedIndex = bit;
                 subnetMask[i].disabled = false;
             }
         }
         else {
             subnetMask[i].selectedIndex = 0;
-            subnetMask[i].disabled = false;
+            for(let j = 0; j < subnetMask[i].options.length ; j++){
+                subnetMask[i].options[j].disabled = false;
+            }
         }
         subnetMaskBinary[i].value = toBinary(subnetMask[i].value);
         bit -= 8;
