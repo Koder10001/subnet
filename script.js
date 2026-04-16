@@ -66,6 +66,7 @@ async function updateSubnetMask(bit, isDisable = false){
         if(bit >= 0){
             if(bit >= 8){
                 subnetMask[i].selectedIndex = 8;
+                subnetMask[i].disabled = true;
                 if(isDisable){
                     for(let j = 0; j < subnetMask[i].options.length ; j++){
                         subnetMask[i].options[j].disabled = true;
