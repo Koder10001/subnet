@@ -16,11 +16,11 @@ function update(ip = undefined){
         case 8:
             ipClass.innerText = "Class A, 8 bit for network";
             break;
-        case 16:
-            ipClass.innerText = "Class B, 16 bit for network"
+        case 12:
+            ipClass.innerText = "Class B, 12 bit for network"
             break;
-        case 24:
-            ipClass.innerText = "Class C, 24 bit for network";
+        case 16:
+            ipClass.innerText = "Class C, 16 bit for network";
             break;
         default:
             ipClass.innerText = "IDK what to do here brother";
@@ -232,10 +232,10 @@ function getClassBit(){
         classBit = 8;
     }
     else if (ipDOM.value > 127 && ipDOM.value < 192){ //class B
-        classBit = 16;
+        classBit = 12;
     }
     else if (ipDOM.value < 224){
-        classBit = 24;
+        classBit = 16;
     }
     else {
         classBit = 32;
@@ -379,6 +379,25 @@ function showPopup(){
     popup.offsetHeight;
     popup.classList.add("show");
 
+}
+
+function paste(ev){
+    let val = (ev.clipboardData || window.clipboardData).getData("text");
+    ev.preventDefault(); // 10.0.0.2
+    if(val.length <= 3){
+        ev.currentTarget.value = val;
+    }
+    else if(val.split(".").length == 4){
+
+        val = val.split(".");
+        let inputs = ev.currentTarget.parentNode.querySelectorAll("input");
+        inputs[0].value = val[0]
+        inputs[1].value = val[1]
+        inputs[2].value = val[2]
+        inputs[3].value = val[3]
+
+    }
+    update();
 }
 
 window.onload = ()=>{
