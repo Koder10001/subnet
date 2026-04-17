@@ -182,11 +182,12 @@ span {
 
 select:disabled {
   background-color: var(--disabled-bg-color);
-  color: var(--secondary-text-color);
+  color: var(--primary-text-color);
   -webkit-appearance: none;
   -moz-appearance: none;
   text-indent: 1px;
   text-overflow: "";
+  opacity: 100%;
 }
 
 #group1 {
